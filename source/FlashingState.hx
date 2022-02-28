@@ -37,16 +37,9 @@ class FlashingState extends MusicBeatState
 				leftState = true;
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
-		  var pressedEnter:Bool = FlxG.keys.justPressed.ENTER;
-      #if mobile
-		  for (touch in FlxG.touches.list)
-		  {
-			  if (touch.justPressed)
-			  {
-				  pressedEnter = true;
-			  }
-		  }
-		  #end
+		  #if mobileC
+		   addVirtualPad(UP_DOWN, A_B);
+		   #end
 				if(!back) {
 					ClientPrefs.flashing = false;
 					ClientPrefs.saveSettings();

@@ -768,25 +768,6 @@ class PlayState extends MusicBeatState
 
 		add(gfGroup);
 
-		// Shitty layering but whatev it works LOL
-		if (curStage == 'forest' && CoolUtil.difficultyString() == 'HARD')
-			remove(gfGroup);
-
-		if (curStage == 'forest-night' && CoolUtil.difficultyString() == 'HARD')
-			remove(gfGroup);
-
-		add(dadGroup);
-		add(boyfriendGroup);
-
-		if (curStage == 'forest-night')
-		    	add(plateia);
-
-		if (curStage == 'forest-hell')
-			add(fire);
-
-		if (curStage == 'forest-rain' && !ClientPrefs.lowQuality)
-			add(rain);
-
 		luaDebugGroup = new FlxTypedGroup<DebugLuaText>();
 		luaDebugGroup.cameras = [camOther];
 		add(luaDebugGroup);
