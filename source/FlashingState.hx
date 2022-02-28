@@ -37,6 +37,7 @@ class FlashingState extends MusicBeatState
 				leftState = true;
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
+		  var pressedEnter:Bool = FlxG.keys.justPressed.ENTER;
       #if mobile
 		  for (touch in FlxG.touches.list)
 		  {
