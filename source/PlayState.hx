@@ -326,6 +326,20 @@ class PlayState extends MusicBeatState
 		if(PlayState.SONG.stage == null || PlayState.SONG.stage.length < 1) {
 			switch (songName)
 			{
+				case 'mean-kiscadee':
+					curStage = 'forest';
+				case 'whistles':
+					curStage = 'forest-night';
+				case 'hellbird':
+					curStage = 'forest-hell';
+				case 'mean-kiscadee-spicy':
+					curStage = 'forest';
+				case 'whistles-spicy':
+					curStage = 'forest-night';
+				case 'hellbird-spicy':
+					curStage = 'forest-rain';
+				case 'a-a-folou':
+					curStage = 'a-folou';
 				default:
 					curStage = 'stage';
 			}
