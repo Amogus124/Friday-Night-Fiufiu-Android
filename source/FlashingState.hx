@@ -27,6 +27,10 @@ class FlashingState extends MusicBeatState
 		warnText.setGraphicSize(Std.int(warnText.width * 0.9));
 		warnText.screenCenter(XY);
 		add(warnText);
+		
+		#if mobileC
+		addVirtualPad(NONE, A_B);
+		#end
 	}
 
 	override function update(elapsed:Float)
@@ -37,9 +41,7 @@ class FlashingState extends MusicBeatState
 				leftState = true;
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
-		  #if mobileC
-		   addVirtualPad(NONE, A_B);
-		   #end
+
 				if(!back) {
 					ClientPrefs.flashing = false;
 					ClientPrefs.saveSettings();
