@@ -38,7 +38,7 @@ class FlashingState extends MusicBeatState
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
 		  #if mobileC
-		   addVirtualPad(UP_DOWN, A_B);
+		   addVirtualPad(NONE, A_B);
 		   #end
 				if(!back) {
 					ClientPrefs.flashing = false;
