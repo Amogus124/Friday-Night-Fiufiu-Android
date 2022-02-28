@@ -371,9 +371,9 @@ class PlayState extends MusicBeatState
 		dadGroup = new FlxSpriteGroup(DAD_X, DAD_Y);
 		gfGroup = new FlxSpriteGroup(GF_X, GF_Y);
 
-		switch (curStage)
+	switch (curStage)
 		{
-	    	 case 'a-folou':
+		    	case 'a-folou':
 				var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.WHITE);
 				add(bg);
 				bg.screenCenter(XY);
@@ -488,7 +488,7 @@ class PlayState extends MusicBeatState
 
 				rain = new BGSprite('bemtevi/raining/rain', 0, 0, 1, 1, ['Rain'], true);
 				rain.screenCenter(XY);
-				
+
 			case 'stage': //Week 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
@@ -766,19 +766,48 @@ class PlayState extends MusicBeatState
 			introSoundsSuffix = '-pixel';
 		}
 
+		// LAYERING LINES
+
 		add(gfGroup);
 
+		// Shitty layering but whatev it works LOL
+		if (curStage == 'forest' && CoolUtil.difficultyString() == 'HARD')
+			remove(gfGroup);
+
+		if (curStage == 'forest-night' && CoolUtil.difficultyString() == 'HARD')
+			remove(gfGroup);
+
+		add(dadGroup);
+		add(boyfriendGroup);
+
+		if (curStage == 'forest-night')
+		    	add(plateia);
+
+		if (curStage == 'forest-hell')
+			add(fire);
+
+		if (curStage == 'forest-rain' && !ClientPrefs.lowQuality)
+			add(rain);
+
+		// LAYERING LINES
+
+		#if LUA_ALLOWED
 		luaDebugGroup = new FlxTypedGroup<DebugLuaText>();
 		luaDebugGroup.cameras = [camOther];
 		add(luaDebugGroup);
+		#end
 
-        var doPush:Bool = false;
-
+		#if (MODS_ALLOWED && LUA_ALLOWED)
 		var doPush:Bool = false;
 		var luaFile:String = 'stages/' + curStage + '.lua';
-		luaFile = Paths.getPreloadPath(luaFile);
-		if(OpenFlAssets.exists(luaFile)) {
+		if(FileSystem.exists(Paths.modFolders(luaFile))) {
+			luaFile = Paths.modFolders(luaFile);
 			doPush = true;
+		} else {
+			luaFile = Paths.getPreloadPath(luaFile);
+			if(FileSystem.exists(luaFile)) {
+				doPush = true;
+			}
 		}
 
 		if(curStage == 'philly') {
@@ -794,7 +823,7 @@ class PlayState extends MusicBeatState
 		}
 		
 		if(doPush) 
-			luaArray.push(new FunkinLua(Asset2File.getPath(luaFile)));
+			luaArray.push(new FunkinLua(luaFile));
 
 		if(!modchartSprites.exists('blammedLightsBlack')) { //Creates blammed light black fade in case you didn't make your own
 			blammedLightsBlack = new ModchartSprite(FlxG.width * -0.5, FlxG.height * -0.5);
@@ -813,6 +842,7 @@ class PlayState extends MusicBeatState
 		if(curStage == 'philly') insert(members.indexOf(blammedLightsBlack) + 1, phillyCityLightsEvent);
 		blammedLightsBlack = modchartSprites.get('blammedLightsBlack');
 		blammedLightsBlack.alpha = 0.0;
+		#end
 
 		var gfVersion:String = SONG.player3;
 		if(gfVersion == null || gfVersion.length < 1) {
