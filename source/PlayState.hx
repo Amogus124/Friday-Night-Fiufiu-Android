@@ -797,19 +797,6 @@ class PlayState extends MusicBeatState
 		add(luaDebugGroup);
 		#end
 
-		#if (MODS_ALLOWED && LUA_ALLOWED)
-		var doPush:Bool = false;
-		var luaFile:String = 'stages/' + curStage + '.lua';
-		if(FileSystem.exists(Paths.modFolders(luaFile))) {
-			luaFile = Paths.modFolders(luaFile);
-			doPush = true;
-		} else {
-			luaFile = Paths.getPreloadPath(luaFile);
-			if(FileSystem.exists(luaFile)) {
-				doPush = true;
-			}
-		}
-
 		if(curStage == 'philly') {
 			phillyCityLightsEvent = new FlxTypedGroup<BGSprite>();
 			for (i in 0...5)
