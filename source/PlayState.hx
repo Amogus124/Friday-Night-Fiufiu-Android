@@ -183,11 +183,6 @@ class PlayState extends MusicBeatState
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
-	
-	var plateia:BGSprite;
-  var fire:BGSprite;
-	var rain:BGSprite;
-	var thunders:BGSprite;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 	var dialogueJson:DialogueFile = null;
@@ -326,20 +321,20 @@ class PlayState extends MusicBeatState
 		if(PlayState.SONG.stage == null || PlayState.SONG.stage.length < 1) {
 			switch (songName)
 			{
-				case 'mean-kiscadee':
-					curStage = 'forest';
-				case 'whistles':
-					curStage = 'forest-night';
-				case 'hellbird':
-					curStage = 'forest-hell';
-				case 'mean-kiscadee-spicy':
-					curStage = 'forest';
-				case 'whistles-spicy':
-					curStage = 'forest-night';
-				case 'hellbird-spicy':
-					curStage = 'forest-rain';
-				case 'a-a-folou':
-					curStage = 'a-folou';
+				case 'spookeez' | 'south' | 'monster':
+					curStage = 'spooky';
+				case 'pico' | 'blammed' | 'philly' | 'philly-nice':
+					curStage = 'philly';
+				case 'milf' | 'satin-panties' | 'high':
+					curStage = 'limo';
+				case 'cocoa' | 'eggnog':
+					curStage = 'mall';
+				case 'winter-horrorland':
+					curStage = 'mallEvil';
+				case 'senpai' | 'roses':
+					curStage = 'school';
+				case 'thorns':
+					curStage = 'schoolEvil';
 				default:
 					curStage = 'stage';
 			}
@@ -373,122 +368,6 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
-	    	 case 'a-folou':
-				var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.WHITE);
-				add(bg);
-				bg.screenCenter(XY);
-
-			case 'forest':
-				var sky:BGSprite = new BGSprite('bemtevi/Sky', 0, 0, 0, 0);
-				sky.screenCenter(XY);
-				add(sky);
-                
-				var clouds:BGSprite = new BGSprite('bemtevi/Clouds', -300, 0, 0.7, 0.7);
-				add(clouds);
-				
-				var cristoredentor:BGSprite = new BGSprite('bemtevi/mountains', -100, -100, 0.8, 0.8);
-				add(cristoredentor);
-
-				var leavesBack:BGSprite = new BGSprite('bemtevi/Sheeeeeeeeeeets', -300, 155, 0.7, 0.7);
-				add(leavesBack);
-
-				var leavesFront:BGSprite = new BGSprite('bemtevi/Sheets', -300, 210, 0.7, 0.7);
-				add(leavesFront);
-
-				if(CoolUtil.difficultyString() == 'SPICY') {
-					GameOverSubstate.characterName = 'flavin-dead';
-					var arwenteam:BGSprite = new BGSprite('bemtevi/Arwen-Team', -300, -200, 0.9, 0.9, ['lol'], true);
-					add(arwenteam);
-				}
-				
-				var trunkGround:BGSprite = new BGSprite('bemtevi/Trunk', -300, 520, 1, 1);
-				add(trunkGround);
-
-			case 'forest-night':
-				var sky:BGSprite = new BGSprite('bemtevi/night/Sky', 0, 0, 0, 0);
-				sky.screenCenter(XY);
-				add(sky);
-                
-				var clouds:BGSprite = new BGSprite('bemtevi/night/Clouds', -300, 0, 0.7, 0.7);
-				add(clouds);
-				
-				var cristoredentor:BGSprite = new BGSprite('bemtevi/night/mountains', -100, -100, 0.8, 0.8);
-				add(cristoredentor);
-
-				var leavesBack:BGSprite = new BGSprite('bemtevi/night/Sheeeeeeeeeeets', -300, 155, 0.7, 0.7);
-				add(leavesBack);
-
-				var leavesFront:BGSprite = new BGSprite('bemtevi/night/Sheets', -300, 210, 0.7, 0.7);
-				add(leavesFront);
-
-				plateia = new BGSprite('bemtevi/plateia', 0, 0, 0.10, 0.10, ['plateia'], true);
-			    	plateia.setGraphicSize(Std.int(plateia.width * 1.5));
-				plateia.screenCenter(XY);
-				plateia.y += 475;
-
-				if(CoolUtil.difficultyString() == 'SPICY') {
-					GameOverSubstate.characterName = 'flavin-dead';
-					var arwenteam:BGSprite = new BGSprite('bemtevi/night/Arwen-Team-Night', -300, -200, 0.9, 0.9, ['lol'], true);
-					add(arwenteam);
-				}
-				
-				var trunkGround:BGSprite = new BGSprite('bemtevi/night/Trunk', -300, 520, 1, 1);
-				add(trunkGround);
-			
-			case 'forest-hell':
-				GameOverSubstate.characterName = 'bf-hell-dead';
-	
-				var sky:BGSprite = new BGSprite('bemtevi/hell/Sky', 0, 0, 0, 0);
-				sky.screenCenter(XY);
-				add(sky);
-
-				var cristoredentor:BGSprite = new BGSprite('bemtevi/hell/mountains', -600, -150, 0.8, 0.8);
-				add(cristoredentor);
-
-				var leavesBack:BGSprite = new BGSprite('bemtevi/hell/Sheeeeeeeets', -700, 155, 0.7, 0.7);
-				add(leavesBack);
-
-				var leavesFront:BGSprite = new BGSprite('bemtevi/hell/Sheets', -700, 240, 0.7, 0.7);
-				add(leavesFront);
-
-				var trunkGround:BGSprite = new BGSprite('bemtevi/hell/Trunk', 800, 600, 1, 1);
-				add(trunkGround);
-
-				fire = new BGSprite('bemtevi/hell/fire', -700, 230, 0.7, 0.7, ['Fire'], true);
-
-			case 'forest-rain':
-               		 	GameOverSubstate.characterName = 'flavin-dead';
-
-				var sky:BGSprite = new BGSprite('bemtevi/raining/Sky', 0, 0, 0, 0);
-				sky.screenCenter(XY);
-				add(sky);
-
-				thunders = new BGSprite('bemtevi/raining/thunders', 0, 0, 1, 1, ['Thunders'], true);
-				if(ClientPrefs.flashing && !ClientPrefs.lowQuality) {
-					add(thunders);
-				}
-
-				var clouds:BGSprite = new BGSprite('bemtevi/raining/Clouds', -600, 0, 0.7, 0.7);
-				add(clouds);
-
-				var cristoredentor:BGSprite = new BGSprite('bemtevi/raining/mountains', -600, -150, 0.8, 0.8);
-				add(cristoredentor);
-
-				var leavesBack:BGSprite = new BGSprite('bemtevi/raining/Sheeeeeeeets', -700, 155, 0.7, 0.7);
-				add(leavesBack);
-
-				var leavesFront:BGSprite = new BGSprite('bemtevi/raining/Sheets', -700, 240, 0.7, 0.7);
-				add(leavesFront);
-
-				var arwenteam:BGSprite = new BGSprite('bemtevi/night/Arwen-Team-Night', -300, -200, 0.9, 0.9, ['lol'], true);
-				add(arwenteam);
-
-				var trunkGround:BGSprite = new BGSprite('bemtevi/raining/Trunk', -480, 500, 1, 1);
-				add(trunkGround);
-
-				rain = new BGSprite('bemtevi/raining/rain', 0, 0, 1, 1, ['Rain'], true);
-				rain.screenCenter(XY);
-				
 			case 'stage': //Week 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
@@ -767,6 +646,17 @@ class PlayState extends MusicBeatState
 		}
 
 		add(gfGroup);
+
+		// Shitty layering but whatev it works LOL
+		if (curStage == 'limo')
+			add(limo);
+
+		add(dadGroup);
+		add(boyfriendGroup);
+		
+		if(curStage == 'spooky') {
+			add(halloweenWhite);
+		}
 
 		luaDebugGroup = new FlxTypedGroup<DebugLuaText>();
 		luaDebugGroup.cameras = [camOther];
